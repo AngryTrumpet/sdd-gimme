@@ -44,6 +44,12 @@
 
 
 					};
+
+
+					//Clears local storage
+					$scope.clearAll = function(){
+							$localStorage.$reset();
+					}	
 	});
 
 

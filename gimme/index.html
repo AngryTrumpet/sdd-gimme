@@ -62,6 +62,8 @@
       <div role="main" class="ui-content">
         <!--ng-controller:  contactController  -->
           <div   class="ui-body ui-body-b"   ng-controller="giftController" align="left">
+            <a  data-role="button" data-theme="b" data-icon="delete"  ng-click="clearAll()"  >Clear Localstorare</a>
+
               <!-- What this ListView uses:
                   Directive: ng-repeat
                     Each record is acessed by "p": example {{p.name}} or   {{p.description}}
@@ -122,6 +124,7 @@
                                 <input id="GiftNotes" type="text" name="GiftNotes" ng-model="giftnotes"  data-mini="true" />
                         </form>
                              <button ng-click="addGift()" data-mini="true"  >Add </button>
+
              </div><!--end of controller-->
 	 </div><!-- /end page content -->
 </div><!-- /end add page -->
