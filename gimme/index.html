@@ -51,15 +51,28 @@
     <div data-role="page" id="home" >
 
 
+      <a data-role="button" data-theme="b" href="#add">Add Gift</a>
 
 
         <!--page navigation header-->
         <div data-role="header">
-          <a data-role="button" data-theme="b" href="#add">Add Gift</a>
         </div><!-- /header -->
 
 		<!--page Content-->
       <div role="main" class="ui-content">
+        <!--ng-controller:  contactController  -->
+          <div   class="ui-body ui-body-b"   ng-controller="giftController" align="left">
+              <!-- What this ListView uses:
+                  Directive: ng-repeat
+                    Each record is acessed by "p": example {{p.name}} or   {{p.description}}
+                    Datasource is ngStorage: ->  storage.datasource
+                    Use: track by $index: ->  This gives us the index value for each row
+                  Image source: src="images/{{p.category}}.jpg  -> All images are in Folder called images.  This image names are the category names
+                -->
+              <ul ng-repeat="p in storage.datasource track by $index" data-role="listview" list-view data-watch="giftList" data-icon="gear"  data-split-theme="a" data-inset="true" ><li><h2><br> Gift: {{p.giftname}} </br> <br> Buyer: {{p.giftbuyer}}</br></h2>  <p> <strong>Cost:</strong> {{p.giftcost}} <br> <strong> priority:</strong> {{p.giftpriority}}  <strong> Store:</strong>  {{p.giftstore}} <br> <strong> Date: </strong>{{p.giftdate}}, <strong>Notes: </strong>  {{p.giftnotes}}</p></li></ul>
+          </div><!--end of controller-->
+
+
 
 
 	   </div><!-- /main content -->
@@ -85,12 +98,26 @@
                                 <input id="GiftBuyer" type="text" name="GiftBuyer" ng-model="giftbuyer"   data-mini="true" />
                                 <label for="GiftCost">Cost</label>
                                 <input id="GiftCost" type="text" name="GiftCost" ng-model="giftcost"  data-mini="true" />
-                                <label for="GiftPriority">Priority</label>
-                                <input id="GiftPriority" type="text" name="GiftPriority" ng-model="giftpriority"  data-mini="true"  />
+
+
+                              <!--  <label for="GiftPriority">Priority</label>
+                                <input id="GiftPriority" type="text" name="GiftPriority" ng-model="giftpriority"  data-mini="true"  /> -->
+
+                                <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
+                                   <legend>Priority</legend>
+                                   <input type="radio" name="LowPriority" id="LowPriority" value="off" checked="checked">
+                                   <label for="LowPriority">!</label>
+                                   <input type="radio" name="MediumPriority" id="MediumPriority" value="on">
+                                   <label for="MediumPriority">!!</label>
+                                   <input type="radio" name="HighPriority" id="HighPriority" value="other">
+                                   <label for="HighPriority">!!!</label>
+                               </fieldset>
+
+
                                 <label for="GiftStore">Store</label>
                                 <input id="GiftStore" type="text" name="GiftStore" ng-model="giftstore"  data-mini="true"  />
                                 <label for="GiftDate">Date</label>
-                                <input id="GiftDate" type=date name="GiftDate" ng-model="giftdate"  data-mini="true" />
+                                <input id="GiftDate" type="date" name="GiftDate" ng-model="giftdate"  data-mini="true" />
                                 <label for="GiftNotes">Notes</label>
                                 <input id="GiftNotes" type="text" name="GiftNotes" ng-model="giftnotes"  data-mini="true" />
                         </form>
