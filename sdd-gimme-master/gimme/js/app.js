@@ -7,13 +7,6 @@
 					$scope.storage = $localStorage.$default({
     						datasource: [{
 
-									giftname: "Shark",
-									giftbuyer: "John",
-									giftcost: "$1000",
-									giftpriority: "!!",
-									giftstore: "eBay",
-									giftdate: "10/10/94",
-									giftnotes: "I would like it, probs a great white please",
 
 								}]
 				});
@@ -41,14 +34,38 @@
 								$scope.giftstore 	    =	  "";
 								$scope.giftdate       =   "";
 								$scope.giftnotes 		  = 	"";
-
-
 					};
+
+					$scope.saveEdit = function (index) {
+						$scope.storage.datasource[index].giftname 		  = 	$scope.giftname;
+						$scope.storage.datasource[index].giftbuyer 			=		$scope.giftbuyer;
+						$scope.storage.datasource[index].giftcost 	    =		$scope.giftcost;
+						$scope.storage.datasource[index].giftpriority   =		$scope.giftpriority;
+						$scope.storage.datasource[index].giftstore 		  =		$scope.giftstore ;
+						$scope.storage.datasource[index].giftdate     	=	  $scope.giftdate ;
+						$scope.storage.datasource[index].giftnotes 			=		$scope.giftnotes ;
+			 };// end saveEdit
+
+			 $scope.deleteGift = function (index) {
+					 $scope.index 	    	= 		index;
+					 $scope.giftname 		  = 		$scope.storage.datasource[index].giftname ;
+					 $scope.giftbuyer 	  = 		$scope.storage.datasource[index].giftbuyer ;
+					 $scope.giftcost 	    = 		$scope.storage.datasource[index].giftcost ;
+					 $scope.giftpriority  = 		$scope.storage.datasource[index].giftpriority ;
+					 $scope.giftstore 	  = 		$scope.storage.datasource[index].giftstore
+					 $scope.giftdate      = 		$scope.storage.datasource[index].giftdate ; ;
+					 $scope.giftnotes 		= 		$scope.storage.datasource[index].giftnotes ;
+		 };
+
+		 $scope.deleteGiftYes = function (index) {
+							 $scope.storage.datasource.splice(index, 1);
+				 }; // end deleteProductYes
 	});
 
 
 
-	//NOTE:  this directive fixes the clash between JQuery Mobile and  Angular when they both try to refreh an item you add to a listview
+
+	//directive fixes the clash between Jquery Mobile and AngularJS when they try to refresh an item you add on the home page
 	app.directive('listView', function () {
 					  var link=function(scope, element, attrs) {
 						$(element).listview();

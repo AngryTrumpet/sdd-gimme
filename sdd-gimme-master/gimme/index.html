@@ -48,7 +48,7 @@
 
 <body>
 
-  <!--------------------------------------------PAGE: List View  with EDIT and DELETE--------------------------------------------------->
+  <!--PAGE: HOME------------------>
 <div data-role="page" id="home">
 
   <a data-role="button" data-theme="b" href="#add">Add Gift</a>
@@ -56,112 +56,77 @@
 
      <!--Main page content-->
    <div role="main" class="ui-content">
-      <!--ng-controller:  contactController  -->
+      <!--ng-controller:  giftController  -->
    <div ng-controller="giftController" align="left">
-            <!-- ListView  ONE-->
-                     <ul ng-repeat="p in storage.datasource track by $index" data-role="listview" list-view data-watch="giftList"  data-split-icon="grid"  data-split-theme="b" data-inset="true"  >
-                            <li><a href="#edit"  ng-click="editGift($index)" data-rel="popup" data-position-to="window" ndata-transition="pop" >
-                              <h2>Name: {{p.giftname}} -  Buyer: {{p.giftbuyer}}</h2>
-                              <p> <strong>cost:</strong> {{p.description}} <br>
-                                 <strong> Brand:</strong> {{p.brand}}  <strong> Category:</strong>  {{p.category}} <br>
-                                  <strong> Purchase Date: </strong>{{p.purchaseDate}},  <strong>Price: </strong>  {{p.price}},
-                                   <strong> Quantity: </strong> {{p.quantity}} <br> <strong> Product Rating: </strong> {{p.rating}} /5 </p></a>
-                                   <a href="#delete"  ng-click="deleteProduct($index)" data-rel="popup" data-position-to="window" data-icon="delete" ndata-transition="pop"  >Delete
+            <!-- ListView -->
+                     <ul ng-repeat="p in storage.datasource track by $index" data-role="listview" list-view data-watch="giftList"  data-split-icon="delete"  data-split-theme="b" data-inset="true"  >
+                            <li><a href="#edit"  ng-click="editGift($index)" data-rel="popup" data-position-to="window" >
+                              <h2>Name: {{p.giftname}} <br>
+                                  Buyer: {{p.giftbuyer}}</h2>
+                              <p> <strong> Cost:          </strong>  {{p.giftcost}}     <br>
+                                  <strong> Priority:      </strong>  {{p.giftpriority}} <br>
+                                  <strong> Category:      </strong>  {{p.giftstore}}    <br>
+                                  <strong> Date:          </strong>  {{p.giftdate}}     <br>
+                                  <strong> Notes:         </strong>  {{p.giftnotes}}    <br>
+                              </p></a>
+                                   <a href="#delete"  ng-click="deleteGift($index)" data-rel="popup" data-position-to="window" data-icon="delete" ndata-transition="pop">Delete
                             </a></li>
                      </ul>
 
                      <!--EDIT-->
-                     <div data-role="popup" id="edit" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
-                     <h3>EDIT RECORD </h3><a href="index.html" ng-click="saveEdit(index)"   data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Save Edit</a>
+                     <div data-role="popup" id="edit" data-theme="b" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+                     <h3>EDIT GIFT</h3><a href="index.html" ng-click="saveEdit(index)"   data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Save Edit</a>
 
                        <table width="90%" border="1" cellspacing="0" cellpadding="0">
                            <tr>
-                             <td>Gift</td>
-                             <td><input  type="text" name="iyemid" ng-model="itemid" /></td>
+                             <td>Gift Name</td>
+                             <td><input  type="text" name="GiftName" ng-model="giftname" /></td>
                            </tr>
                            <tr>
-                             <td>Name</td>
-                             <td> <input  type="text" name="name" ng-model="name"  /></td>
+                             <td>Buyer</td>
+                             <td> <input  type="text" name="GiftBuyer" ng-model="giftbuyer"  /></td>
                            </tr>
                            <tr>
-                             <td>Description</td>
-                             <td> <input  type="text" name="description" ng-model="description"  /></td>
+                             <td>Cost</td>
+                             <td> <input  type="text" name="GiftCost" ng-model="giftcost"  /></td>
                            </tr>
                            <tr>
-                             <td>Brand</td>
-                             <td> <input type="text" name="brand" ng-model="brand"  /></td>
+                             <td>Priority</td>
+                             <td>
+                                    <input type="radio" name="Priority" id="LowPriority" ng-model="giftpriority" value="low">
+                                    <label for="LowPriority">Low</label>
+                                    <input type="radio" name="Priority" id="MediumPriority" ng-model="giftpriority" value="medium">
+                                    <label for="MediumPriority">Medium</label>
+                                    <input type="radio" name="Priority" id="HighPriority" ng-model="giftpriority" value="high">
+                                    <label for="HighPriority">High</label>
+                             </td>
                            </tr>
                            <tr>
-                             <td>Category</td>
-                             <td> <input type="text" name="category" ng-model="category"  /></td>
+                             <td>Store</td>
+                             <td> <input type="text" name="GiftStore" ng-model="giftstore"  /></td>
                            </tr>
                            <tr>
-                             <td>Purchase Date</td>
-                             <td><input  type="text" name="city" ng-model="purchaseDate"  /></td>
+                             <td>Date</td>
+                             <td><input  type="text" name="GiftDate" ng-model="giftdate"  /></td>
                            </tr>
                            <tr>
-                             <td>Price</td>
-                             <td> <input  type="text" name="price" ng-model="price"  /></td>
-                           </tr>
-                           <tr>
-                             <td>Quantity</td>
-                             <td><input type="text" name="quantity" ng-model="quantity"  /></td>
-                           </tr>
-                           <tr>
-                             <td>Rating</td>
-                             <td><input type="text" name="rating" ng-model="rating"  /></td>
+                             <td>Notes</td>
+                             <td> <input  type="text" name="GiftNotes" ng-model="giftnotes"  /></td>
                            </tr>
                          </table>
                      </div><!--end of edit-->
 
 
                  <!--DELETE-->
-                 <div data-role="popup" id="delete" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
-                     <h3>DELETE </h3>
+                 <div data-role="popup" id="delete" data-theme="b" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+                     <h3>DELETE</h3>
                      <p>Are your sure you want to delete</p>
-                       <table width="90%" border="1" cellspacing="2" cellpadding="2">
-                           <tr>
-                             <td>Pid</td>
-                             <td><input  type="text" name="iyemid" ng-model="itemid" /></td>
-                           </tr>
-                           <tr>
-                             <td>Name</td>
-                             <td> <input  type="text" name="name" ng-model="name"  /></td>
-                           </tr>
-                           <tr>
-                             <td>Description</td>
-                             <td> <input  type="text" name="description" ng-model="description"  /></td>
-                           </tr>
-                           <tr>
-                             <td>Brand</td>
-                             <td> <input type="text" name="brand" ng-model="brand"  /></td>
-                           </tr>
-                           <tr>
-                             <td>Category</td>
-                             <td> <input type="text" name="category" ng-model="category"  /></td>
-                           </tr>
-                           <tr>
-                             <td>Purchase Date</td>
-                             <td><input  type="text" name="city" ng-model="purchaseDate"  /></td>
-                           </tr>
-                           <tr>
-                             <td>Price</td>
-                             <td> <input  type="text" name="price" ng-model="price"  /></td>
-                           </tr>
-                           <tr>
-                             <td>Quantity</td>
-                             <td><input type="text" name="quantity" ng-model="quantity"  /></td>
-                           </tr>
-                           <tr>
-                             <td>Rating</td>
-                             <td><input type="text" name="rating" ng-model="rating"  /></td>
-                           </tr>
-                         </table>
-                     </div><!--end of edit-->
+                     <a href="index.html"  ng-click="deleteGift()" data-mini="true"  >Delete</a>
+                </div><!--end of delete-->
 
-                 </div>  <!--end of delete-->
-       </div><!--end of controller-->
-</div><!-- /end of main content -->
+            </div>  <!--end of controller-->
+       </div><!--end of main content-->
+</div><!-- /end of main page -->
 
 
 
@@ -186,18 +151,17 @@
                                 <label for="GiftCost">Cost</label>
                                 <input id="GiftCost" type="text" name="GiftCost" ng-model="giftcost"  data-mini="true" />
                                 <fieldset data-role="controlgroup" data-type="horizontal">
-                                     <input type="radio" name="Priority" id="LowPriority" value="low" checked="checked">
-                                     <label for="LowPriority">One</label>
-                                     <input type="radio" name="Priority" id="MediumPriority" value="medium">
-                                     <label for="MediumPriority">Two</label>
-                                     <input type="radio" name="Priority" id="HighPriority" value="high">
-                                     <label for="HighPriority">Three</label>
-                                 </fieldset>
-
+                                     <input type="radio" name="Priority" id="LowPriority" ng-model="giftpriority" value="low">
+                                     <label for="LowPriority">Low</label>
+                                     <input type="radio" name="Priority" id="MediumPriority" ng-model="giftpriority" value="medium">
+                                     <label for="MediumPriority">Medium</label>
+                                     <input type="radio" name="Priority" id="HighPriority" ng-model="giftpriority" value="high">
+                                     <label for="HighPriority">High</label>
+                                </fieldset>
                                 <label for="GiftStore">Store</label>
                                 <input id="GiftStore" type="text" name="GiftStore" ng-model="giftstore"  data-mini="true"  />
                                 <label for="GiftDate">Date</label>
-                                <input id="GiftDate" type="date" name="GiftDate" ng-model="giftdate"  data-mini="true" />
+                                <input id="GiftDate" type="text" data-role="date" name="GiftDate" placeholder="dd/MM/YYYY" ng-model="giftdate"  data-mini="true" />
                                 <label for="GiftNotes">Notes</label>
                                 <input id="GiftNotes" type="text" name="GiftNotes" ng-model="giftnotes"  data-mini="true" />
                         </form>
