@@ -57,9 +57,11 @@
      <!--Main page content-->
    <div role="main" class="ui-content">
       <!--ng-controller:  giftController  -->
-   <div ng-controller="giftController" align="left">
+   <div ng-controller="giftController" align="left" ng-init="filter_len = (storage.datasource | filter: { giftname : searchQuery }).length">
+
+     	<input type="text" ng-model="searchQuery">
             <!-- ListView -->
-                     <ul ng-repeat="p in storage.datasource track by $index" data-role="listview" list-view data-watch="giftList"  data-split-icon="delete"  data-split-theme="b" data-inset="true"  >
+                     <ul ng-repeat="p in storage.datasource track by $index" data-role="listview" list-view data-watch="userList"  data-split-icon="grid"  data-split-theme="a" data-inset="true" ng-repeat="item in Storage" = (storage.datasource | filter:searchQuery)  >
                             <li><a href="#edit"  ng-click="editGift($index)" data-rel="popup" data-position-to="window" >
                               <h2>Name: {{p.giftname}} <br>
                                   Buyer: {{p.giftbuyer}}</h2>
@@ -69,26 +71,25 @@
                                   <strong> Date:          </strong>  {{p.giftdate}}     <br>
                                   <strong> Notes:         </strong>  {{p.giftnotes}}    <br>
                               </p></a>
-                                   <a href="#delete"  ng-click="deleteGift($index)" data-rel="popup" data-position-to="window" data-icon="delete" ndata-transition="pop">Delete
-                            </a></li>
+                                   <a href="#delete"  ng-click="deleteGift($index)">Delete</a></li>
                      </ul>
 
                      <!--EDIT-->
-                     <div data-role="popup" id="edit" data-theme="b" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+                     <div data-role="popup" id="edit" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
                      <h3>EDIT GIFT</h3><a href="index.html" ng-click="saveEdit(index)"   data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Save Edit</a>
 
-                       <table width="90%" border="1" cellspacing="0" cellpadding="0">
+                       <table width="90%" border="1" cellspacing="2" cellpadding="2">
                            <tr>
                              <td>Gift Name</td>
-                             <td><input  type="text" name="GiftName" ng-model="giftname" /></td>
+                             <td><input  type="text" name="GiftName" id="GiftName" ng-model="giftname" /></td>
                            </tr>
                            <tr>
                              <td>Buyer</td>
-                             <td> <input  type="text" name="GiftBuyer" ng-model="giftbuyer"  /></td>
+                             <td> <input  type="text" name="GiftBuyer" id="GiftBuyer" ng-model="giftbuyer"  /></td>
                            </tr>
                            <tr>
                              <td>Cost</td>
-                             <td> <input  type="text" name="GiftCost" ng-model="giftcost"  /></td>
+                             <td> <input  type="text" name="GiftCost" id="GiftCost" ng-model="giftcost"  /></td>
                            </tr>
                            <tr>
                              <td>Priority</td>
@@ -103,15 +104,15 @@
                            </tr>
                            <tr>
                              <td>Store</td>
-                             <td> <input type="text" name="GiftStore" ng-model="giftstore"  /></td>
+                             <td> <input type="text" name="GiftStore" id="GiftStore" ng-model="giftstore"  /></td>
                            </tr>
                            <tr>
                              <td>Date</td>
-                             <td><input  type="text" name="GiftDate" ng-model="giftdate"  /></td>
+                             <td><input  type="text" name="GiftDate" id="GiftDate" ng-model="giftdate"  /></td>
                            </tr>
                            <tr>
                              <td>Notes</td>
-                             <td> <input  type="text" name="GiftNotes" ng-model="giftnotes"  /></td>
+                             <td> <input  type="text" name="GiftNotes" id="GiftNotes" ng-model="giftnotes"  /></td>
                            </tr>
                          </table>
                      </div><!--end of edit-->
@@ -151,7 +152,7 @@
                                 <label for="GiftCost">Cost</label>
                                 <input id="GiftCost" type="text" name="GiftCost" ng-model="giftcost"  data-mini="true" />
                                 <fieldset data-role="controlgroup" data-type="horizontal">
-                                     <input type="radio" name="Priority" id="LowPriority" ng-model="giftpriority" value="low">
+                                     <input type="radio" name="Priority" id="LowPriority" ng-model="giftpriority" value="low" >
                                      <label for="LowPriority">Low</label>
                                      <input type="radio" name="Priority" id="MediumPriority" ng-model="giftpriority" value="medium">
                                      <label for="MediumPriority">Medium</label>
