@@ -61,10 +61,10 @@
 
      	<input type="text" ng-model="searchQuery">
             <!-- ListView -->
-                     <ul ng-repeat="p in storage.datasource track by $index" data-role="listview" list-view data-watch="userList"  data-split-icon="grid"  data-split-theme="a" data-inset="true" ng-repeat="item in Storage" = (storage.datasource | filter:searchQuery)  >
-                            <li><a href="#edit"  ng-click="editGift($index)" data-rel="popup" data-position-to="window" >
-                              <h2>Name: {{p.giftname}} <br>
-                                  Buyer: {{p.giftbuyer}}</h2>
+                     <ul ng-repeat="p in storage.datasource track by $index" data-role="listview" list-view data-watch="userList"  data-split-icon="delete"  data-split-theme="a" data-inset="true" ng-repeat="item in Storage" = (storage.datasource | filter:searchQuery)  >
+                            <li><a href="#edit"  ng-click="displayeditGift($index)" data-rel="popup" data-position-to="window" >
+                              <h1>Name: {{p.giftname}} <br>
+                                  Buyer: {{p.giftbuyer}}</h1>
                               <p> <strong> Cost:          </strong>  {{p.giftcost}}     <br>
                                   <strong> Priority:      </strong>  {{p.giftpriority}} <br>
                                   <strong> Category:      </strong>  {{p.giftstore}}    <br>
@@ -122,7 +122,7 @@
                  <div data-role="popup" id="delete" data-theme="b" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
                      <h3>DELETE</h3>
                      <p>Are your sure you want to delete</p>
-                     <a href="index.html"  ng-click="deleteGift()" data-mini="true"  >Delete</a>
+                     <a href="index.html"  ng-click="deleteGift();" data-mini="true">Delete</a>
                 </div><!--end of delete-->
 
             </div>  <!--end of controller-->
@@ -159,6 +159,7 @@
                                      <input type="radio" name="Priority" id="HighPriority" ng-model="giftpriority" value="high">
                                      <label for="HighPriority">High</label>
                                 </fieldset>
+
                                 <label for="GiftStore">Store</label>
                                 <input id="GiftStore" type="text" name="GiftStore" ng-model="giftstore"  data-mini="true"  />
                                 <label for="GiftDate">Date</label>
