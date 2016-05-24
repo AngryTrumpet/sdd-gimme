@@ -1,6 +1,6 @@
 //Created by Max Barassi
 
-			var app = angular.module('app',['ngStorage','bsTable']);
+			var app = angular.module('app',['ngStorage']);
 			app.controller('giftController', function($scope,$localStorage) {
 
 					// this CREATES a localstorage called "datasource".
@@ -24,33 +24,31 @@ $scope.addGift = function () {
 
 			});
 
-				$scope.giftname 	  	= 	"";
-				$scope.giftbuyer 	  	= 	"";
-				$scope.giftcost 	    =   "";
-				$scope.giftpriority   =  	"";
-				$scope.giftstore 	    =	  "";
-				$scope.giftdate       =   "";
-				$scope.giftnotes 		  = 	"";
-
-
-};
+				$scope.giftname 	  	= 	"" ;
+				$scope.giftbuyer 	  	= 	"" ;
+				$scope.giftcost 	    =   "" ;
+				$scope.giftpriority   =  	"" ;
+				$scope.giftstore 	    =	  "" ;
+				$scope.giftdate       =   "" ;
+				$scope.giftnotes 		  = 	"" ;
+};// end Add Function
 
          $scope.displayeditGift = function (index) {
 						 $scope.index                 =     $scope.storage.datasource[index];
-						 $scope.giftname              =     $scope.storage.datasource[index].giftname;
-						 $scope.giftbuyer             = 		$scope.storage.datasource[index].giftbuyer;
-						 $scope.giftcost              = 		$scope.storage.datasource[index].giftcost;
-						 $scope.giftpriority 					= 		$scope.storage.datasource[index].giftpriority;
-						 $scope.giftstore             = 		$scope.storage.datasource[index].giftstore;
-						 $scope.giftdate              = 		$scope.storage.datasource[index].giftdate;
-						 $scope.giftnotes             = 	  $scope.storage.datasource[index].giftnotes;                                   ;
-}; // end Display Edit Gift
+						 $scope.giftname              =     $scope.storage.datasource[index].giftname ;
+						 $scope.giftbuyer             = 		$scope.storage.datasource[index].giftbuyer ;
+						 $scope.giftcost              = 		$scope.storage.datasource[index].giftcost ;
+						 $scope.giftpriority 					= 		$scope.storage.datasource[index].giftpriority ;
+						 $scope.giftstore             = 		$scope.storage.datasource[index].giftstore ;
+						 $scope.giftdate              = 		$scope.storage.datasource[index].giftdate ;
+						 $scope.giftnotes             = 	  $scope.storage.datasource[index].giftnotes ;                                   ;
+}; // end displayEditGift
 
 					$scope.saveEdit = function (index) {
-						$scope.storage.datasource[index].giftname 		  = 	$scope.giftname;
-						$scope.storage.datasource[index].giftbuyer 			=		$scope.giftbuyer;
-						$scope.storage.datasource[index].giftcost 	    =		$scope.giftcost;
-						$scope.storage.datasource[index].giftpriority   =		$scope.giftpriority;
+						$scope.storage.datasource[index].giftname 		  = 	$scope.giftname ;
+						$scope.storage.datasource[index].giftbuyer 			=		$scope.giftbuyer ;
+						$scope.storage.datasource[index].giftcost 	    =		$scope.giftcost ;
+						$scope.storage.datasource[index].giftpriority   =		$scope.giftpriority ;
 						$scope.storage.datasource[index].giftstore 		  =		$scope.giftstore ;
 						$scope.storage.datasource[index].giftdate     	=	  $scope.giftdate ;
 						$scope.storage.datasource[index].giftnotes 			=		$scope.giftnotes ;
@@ -59,6 +57,7 @@ $scope.addGift = function () {
 		   $scope.deleteGift = function (index) {
 	  					 $scope.storage.datasource.splice(index, 1);
 							 localStorage.removeItem(index);
+
 	   	 }; // end Delete Gift
 	});
 
