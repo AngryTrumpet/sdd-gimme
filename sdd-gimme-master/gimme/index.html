@@ -34,6 +34,8 @@
           			<!--ngStorage-->
         <script src="js/ngStorage.min.js"></script>
         <script src="js/app.js"></script>
+                <!--angular messages-->
+        <script src="js/angular-messages.min.js"></script>
 
 
 
@@ -62,10 +64,12 @@
 
 
      <!--Main page content-->
-   <div role="main" class="ui-content">
+   <div role="main" class="ui-content"  ng-init="filter_len = (storage.datasource | filter: { giftname : searchQuery }).length">
       <!--ng-controller:  giftController  -->
 
      <button ng-click="clearAll()" data-mini="true"  >clearAll </button>
+     <input type="text" ng-model="searchQuery"  >
+
      <br>
             <!-- ListView -->
                      <ul ng-repeat="p in storage.datasource track by $index" data-role="listview" list-view data-watch="giftList"  data-split-icon="delete"  data-split-theme="b" data-inset="true"  >
@@ -157,7 +161,7 @@
             <div  class="ui-body ui-body-b"  ng-controller="giftController" align="left">
                          <form name="personForm" novalidate >
                                 <label for="giftname">Gift Name</label>
-                                <input id="giftname" type="text" name="giftname" ng-model="giftname"   data-mini="true"  />
+                                <input id="giftname" type="text" name="giftname" ng-model="giftname"   data-mini="true"  />                                
                                 <label for="GiftBuyer">Buyer</label>
                                 <input id="GiftBuyer" type="text" name="GiftBuyer" ng-model="giftbuyer"   data-mini="true" />
                                 <label for="GiftCost">Cost</label>
