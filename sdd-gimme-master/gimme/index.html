@@ -34,8 +34,6 @@
           			<!--ngStorage-->
         <script src="js/ngStorage.min.js"></script>
         <script src="js/app.js"></script>
-                <!--angular messages-->
-        <script src="js/angular-messages.min.js"></script>
 
 
 
@@ -58,28 +56,31 @@
 <body>
 
   <!--PAGE: HOME------------------>
-<div data-role="page" id="home" ng-controller="giftController">
+<div data-role="page" id="home" ng-controller="giftController"  >
 
   <a data-role="button" data-theme="b" href="#add">Add Gift</a>
 
 
      <!--Main page content-->
-   <div role="main" class="ui-content"  ng-init="filter_len = (storage.datasource | filter: { giftname : searchQuery }).length">
+   <div role="main" class="ui-content">
       <!--ng-controller:  giftController  -->
 
-     <button ng-click="clearAll()" data-mini="true"  >clearAll </button>
-     <input type="text" ng-model="searchQuery"  >
-
+     <!-- <button data-theme="b" ng-click="clearAll()" data-mini="true"  >clearAll </button> -->
      <br>
+     <input type="text" ng-model="searchQuery"  >
+     <!-- <strong>Number of filtered products:</strong>{{Storage.datasource.length}} -->
+
+
             <!-- ListView -->
-                     <ul ng-repeat="p in storage.datasource track by $index" data-role="listview" list-view data-watch="giftList"  data-split-icon="delete"  data-split-theme="b" data-inset="true"  >
+
+                     <ul ng-repeat="p in storage.datasource | filter:searchQuery"  data-role="listview" list-view data-watch="giftList"  data-split-icon="delete"  data-split-theme="b" data-inset="true"  >
                             <li><a href="#edit"  ng-click="displayeditGift($index)" data-rel="popup" data-position-to="window" >
                               <h2>Name: {{p.giftname}} <br>
                                   Buyer: {{p.giftbuyer}}</h2>
                               <p> <strong> Cost:          </strong>  {{p.giftcost}}     <br>
                                   <strong> Priority:      </strong>  {{p.giftpriority}} <br>
                                   <strong> Category:      </strong>  {{p.giftstore}}    <br>
-                                  <strong> Date:          </strong>  {{p.giftdate}}     <br>
+                                  <strong> Date:          </strong>  {{p.giftdate | date: "dd/MM/yyyy"}} <br>
                                   <strong> Notes:         </strong>  {{p.giftnotes}}    <br>
                               </p></a>
                                    <a href="#delete" ng-click="deletegift(index") data-rel="popup" data-position-to="window" data-transition="pop">Delete</a>
@@ -87,12 +88,12 @@
                      </ul>
 
                      <!--EDIT-->
-                     <div data-role="popup" id="edit" data-theme="b" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+                     <div data-role="popup" id="edit" data-theme="b" data-overlay-theme="b" data-dismissable="false" class="ui-content" style="max-width:340px; padding-bottom:2em;">
                      <h3>EDIT GIFT</h3><a href="index.html" ng-click="saveEdit(index)"  data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Save Edit</a>
 
                        <table width="90%" border="1" cellspacing="0" cellpadding="0">
                            <tr>
-                             <td><strong>Gift Name:  {{giftname}}</strong> </td>
+                             <td>Gift Name:  {{giftname}} </td>
                              <td><input  type="text"  ng-model="giftname"     />  </td>
                            </tr>
                            <tr>
@@ -101,7 +102,7 @@
                            </tr>
                            <tr>
                              <td>Cost</td>
-                             <td> <input  type="text" name="giftcost" id="giftcost" ng-model="giftcost"  /></td>
+                             <td> <input  type="number" name="giftcost" id="giftcost" ng-model="giftcost"  /></td>
                            </tr>
                            <tr>
                              <td>Priority</td>
@@ -126,6 +127,7 @@
                              <td>Notes</td>
                              <td> <input  type="text" name="giftnotes" id="giftnotes" ng-model="giftnotes"  /></td>
                            </tr>
+                           {{errorEditGiftName}}
                          </table>
                      </div><!--end of edit-->
 
@@ -159,13 +161,15 @@
      <div role="main" class="ui-content">
             <!--ng-controller:  contactController  -->
             <div  class="ui-body ui-body-b"  ng-controller="giftController" align="left">
+
                          <form name="personForm" novalidate >
                                 <label for="giftname">Gift Name</label>
-                                <input id="giftname" type="text" name="giftname" ng-model="giftname"   data-mini="true"  />                                
+                                <input id="giftname" type="text" name="giftname" ng-model="giftname"   data-mini="true"  />
+                                <p> {{errorEnterGiftName}} </p>
                                 <label for="GiftBuyer">Buyer</label>
                                 <input id="GiftBuyer" type="text" name="GiftBuyer" ng-model="giftbuyer"   data-mini="true" />
                                 <label for="GiftCost">Cost</label>
-                                <input id="GiftCost" type="text" name="GiftCost" ng-model="giftcost"  data-mini="true" />
+                                <input id="GiftCost" type="number" name="GiftCost" ng-model="giftcost"  data-mini="true" />
                                 <fieldset data-role="controlgroup" data-type="horizontal">
                                      <input type="radio" name="Priority" id="LowPriority" ng-model="giftpriority" value="low" >
                                      <label for="LowPriority">Low</label>
@@ -177,10 +181,11 @@
                                 <label for="GiftStore">Store</label>
                                 <input id="GiftStore" type="text" name="GiftStore" ng-model="giftstore"  data-mini="true"  />
                                 <label for="GiftDate">Date</label>
-                                <input id="GiftDate" type="text" data-role="date" name="GiftDate" placeholder="dd/MM/YYYY" ng-model="giftdate"  data-mini="true" />
+                                <input id="GiftDate" type="date" data-role="date" name="GiftDate" placeholder="dd/MM/YYYY" ng-model="giftdate"  data-mini="true" />
                                 <label for="GiftNotes">Notes</label>
-                                <input id="GiftNotes" type="text" name="GiftNotes" ng-model="giftnotes"  data-mini="true" />
+                                <input id="GiftNotes" type="text" name="GiftNotes" ng-model="giftnotes"  data-mini="true" /> <br>
                         </form>
+
                              <button ng-click="addGift()" data-mini="true"  >Add </button>
              </div><!--end of controller-->
 	 </div><!-- /end page content -->

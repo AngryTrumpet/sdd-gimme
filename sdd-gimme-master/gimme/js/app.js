@@ -14,67 +14,89 @@
 				// Used in PAGE :  ADD
 					$scope.addGift = function () {
 
-							$scope.storage.datasource.push({
-									giftname:			  $scope.giftname,
-									giftbuyer: 			$scope.giftbuyer,
-									giftcost: 	    $scope.giftcost,
-									giftpriority:	 	$scope.giftpriority,
-									giftstore: 		  $scope.giftstore,
-									giftdate: 	    $scope.giftdate,
-									giftnotes: 			$scope.giftnotes,
+						if ($scope.giftname == "" || $scope.giftname == null){
+									$scope.errorEnterGiftName = "Please enter a gift name";
+							}
+							else {
+								$scope.storage.datasource.push({
+										giftname:			  $scope.giftname,
+										giftbuyer: 			$scope.giftbuyer,
+										giftcost: 	    $scope.giftcost,
+										giftpriority:	 	$scope.giftpriority,
+										giftstore: 		  $scope.giftstore,
+										giftdate: 	    $scope.giftdate,
+										giftnotes: 			$scope.giftnotes,
 
-								});
-									$scope.giftname 	  	= 	"";
-									$scope.giftbuyer 	  	= 	"";
-									$scope.giftcost 	    =   "";
-									$scope.giftpriority   =  	"";
-									$scope.giftstore 	    =	  "";
-									$scope.giftdate       =   "";
-									$scope.giftnotes 		  = 	"";
-						}
+									});
+										$scope.giftname 	  	= 	"";
+										$scope.giftbuyer 	  	= 	"";
+										$scope.giftcost 	    =   "";
+										$scope.giftpriority   =  	"";
+										$scope.giftstore 	    =	  "";
+										$scope.giftdate       =   "";
+										$scope.giftnotes 		  = 	"";
+
+							}
 					};
 
+
+
 					$scope.displayeditGift = function (index) {
-						$scope.index				= index;
-						$scope.giftname 			= $scope.storage.datasource[index].giftname ;
-						$scope.giftbuyer 			= $scope.storage.datasource[index].giftbuyer 	;
-						$scope.giftcost 			= $scope.storage.datasource[index].giftcost 	    ;
-						$scope.giftpriority 		= $scope.storage.datasource[index].giftpriority   ;
-						$scope.giftstore  			= $scope.storage.datasource[index].giftstore 		  ;
-						$scope.giftdate  			= $scope.storage.datasource[index].giftdate     	;
-						$scope.giftnotes 			= $scope.storage.datasource[index].giftnotes 			;
+
+						$scope.index					= index;
+						$scope.giftname 			= $scope.storage.datasource[index].giftname;
+						$scope.giftbuyer 			= $scope.storage.datasource[index].giftbuyer;
+						$scope.giftcost 			= $scope.storage.datasource[index].giftcost;
+						$scope.giftpriority 	= $scope.storage.datasource[index].giftpriority;
+						$scope.giftstore  		= $scope.storage.datasource[index].giftstore;
+						$scope.giftdate  			= $scope.storage.datasource[index].giftdate;
+						$scope.giftnotes 			= $scope.storage.datasource[index].giftnotes;
+
+
 					}; // end displayEditgift
 
 
 					$scope.saveEdit = function (index) {
+
+						if ($scope.giftname == "" || $scope.giftname == null){
+							$scope.errorEditGiftName = "Please enter a gift name";
+					}
+					else {
 						$scope.storage.datasource[index].giftname 		  = 	$scope.giftname;
 						$scope.storage.datasource[index].giftbuyer 			=		$scope.giftbuyer;
 						$scope.storage.datasource[index].giftcost 	    =		$scope.giftcost;
 						$scope.storage.datasource[index].giftpriority   =		$scope.giftpriority;
-						$scope.storage.datasource[index].giftstore 		  =		$scope.giftstore ;
-						$scope.storage.datasource[index].giftdate     	=	  $scope.giftdate ;
-						$scope.storage.datasource[index].giftnotes 			=		$scope.giftnotes ;
+						$scope.storage.datasource[index].giftstore 		  =		$scope.giftstore;
+						$scope.storage.datasource[index].giftdate     	=	  $scope.giftdate;
+						$scope.storage.datasource[index].giftnotes 			=		$scope.giftnotes;
+
+					}
 			 };// end saveEdit
 
 			 $scope.deletegiftXXX = function (index) {
 					 $scope.index 	    	= 		index;
-					 $scope.giftname 		  =   	$scope.storage.datasource[index].giftname ;
-					 $scope.giftbuyer 	  = 		$scope.storage.datasource[index].giftbuyer ;
-					 $scope.giftcost 	    = 		$scope.storage.datasource[index].giftcost ;
-					 $scope.giftpriority  = 		$scope.storage.datasource[index].giftpriority ;
-					 $scope.giftstore 	  = 		$scope.storage.datasource[index].giftstore ;
-					 $scope.giftdate      = 		$scope.storage.datasource[index].giftdate ;
-					 $scope.giftnotes 		= 		$scope.storage.datasource[index].giftnotes ;
+					 $scope.giftname 		  =  		$scope.storage.datasource[index].giftname;
+					 $scope.giftbuyer 	  = 		$scope.storage.datasource[index].giftbuyer;
+					 $scope.giftcost 	    = 		$scope.storage.datasource[index].giftcost;
+					 $scope.giftpriority  = 		$scope.storage.datasource[index].giftpriority;
+					 $scope.giftstore 	  = 		$scope.storage.datasource[index].giftstore;
+					 $scope.giftdate      = 		$scope.storage.datasource[index].giftdate;
+					 $scope.giftnotes 		= 		$scope.storage.datasource[index].giftnotes;
 		   };
 
 		   $scope.deleteGiftYes = function (index) {
-			   console.log("delete here " +index)
 	  					 $scope.storage.datasource.splice(index, 1);
+
 	   	 }; // end deleteProductYes
 
 		 $scope.clearAll = function(){
 							$localStorage.$reset();
-					}	// end clearALL		s
+					}	// end clearALL
+
+		 $scope.average = function(){
+
+
+		 }
 
 	});
 
